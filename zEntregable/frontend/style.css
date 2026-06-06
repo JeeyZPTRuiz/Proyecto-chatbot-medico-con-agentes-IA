@@ -1,0 +1,618 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Variables globales de diseno */
+:root {
+    --color-blanco: #ffffff;
+    --color-fondo-general: #f8fafc;
+    --color-fondo-chat: #f1f5f9;
+    --color-texto-principal: #1e293b;
+    --color-texto-secundario: #64748b;
+    --color-borde: #cbd5e1;
+    --color-borde-suave: #e2e8f0;
+    
+    /* Colores medicos basicos */
+    --color-primario-azul: #0284c7;
+    --color-primario-azul-hover: #0369a1;
+    --color-secundario-verde: #10b981;
+    --color-secundario-verde-hover: #059669;
+    
+    /* Burbujas de chat */
+    --color-burbuja-usuario: #e0f2fe;
+    --color-burbuja-bot: #ffffff;
+    
+    --fuente-principal: 'Inter', sans-serif;
+    --sombra-tarjeta: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --sombra-tarjeta-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --transicion-rapida: all 0.2s ease;
+}
+
+/* Reinicio de estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-fondo-general);
+    color: var(--color-texto-principal);
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Boton de menu movil de control */
+.boton_movil {
+    display: none;
+    position: fixed;
+    top: 10px;
+    right: 16px;
+    z-index: 1000;
+    padding: 10px 18px;
+    font-family: var(--fuente-principal);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-blanco);
+    background-color: var(--color-primario-azul);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: var(--transicion-rapida);
+}
+
+.boton_movil:hover {
+    background-color: var(--color-primario-azul-hover);
+}
+
+.boton_movil:active {
+    transform: scale(0.96);
+}
+
+/* Contenedor principal del layout flexbox */
+.layout_principal {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Columna izquierda de panel principal */
+.columna_inventario {
+    width: 70%;
+    height: 100%;
+    background-color: var(--color-blanco);
+    padding: 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Menu de navegacion superior */
+.navegacion_superior {
+    display: flex;
+    gap: 12px;
+    border-bottom: 2px solid var(--color-borde-suave);
+    padding-bottom: 12px;
+    margin-bottom: 8px;
+}
+
+.enlace_nav {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--color-borde-suave);
+    background-color: var(--color-fondo-general);
+    color: var(--color-texto-secundario);
+    font-family: var(--fuente-principal);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transicion-rapida);
+}
+
+.enlace_nav:hover {
+    background-color: var(--color-borde-suave);
+    color: var(--color-texto-principal);
+}
+
+/* Estado activo de los enlaces de navegacion */
+.enlace_nav.activo,
+.enlace_nav.btn_activo {
+    background-color: var(--color-primario-azul);
+    color: var(--color-blanco);
+    border-color: var(--color-primario-azul);
+}
+
+/* Clases de utilidad */
+.oculto {
+    display: none !important;
+}
+
+/* Contenedor de cada vista individual */
+.contenedor_vista {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: aparecer_suave 0.3s ease forwards;
+}
+
+/* Encabezados de seccion generales */
+.encabezado_seccion {
+    border-bottom: 1px solid var(--color-borde-suave);
+    padding-bottom: 16px;
+}
+
+.icono_seccion {
+    font-size: 28px;
+    margin-bottom: 4px;
+}
+
+.titulo_seccion {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-primario-azul);
+}
+
+.subtitulo_seccion {
+    font-size: 13px;
+    color: var(--color-texto-secundario);
+    margin-top: 2px;
+}
+
+/* Grid de tarjetas para el inventario */
+.lista_tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 8px 0;
+}
+
+/* Tarjeta individual de producto */
+.tarjeta_producto {
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde-suave);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: var(--sombra-tarjeta);
+    transition: var(--transicion-rapida);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tarjeta_producto:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-tarjeta-hover);
+    border-color: var(--color-borde);
+}
+
+.tarjeta_producto h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-primario-azul);
+}
+
+.tarjeta_producto p {
+    font-size: 13px;
+    color: var(--color-texto-secundario);
+}
+
+.tarjeta_producto .badge_tipo {
+    align-self: flex-start;
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 6px;
+    background-color: #f0fdf4;
+    color: var(--color-secundario-verde);
+    border: 1px solid #dcfce7;
+}
+
+.tarjeta_producto .stock_info {
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Boton de agregar al carrito dentro de la tarjeta */
+.boton_agregar_carrito {
+    margin-top: 8px;
+    height: 36px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--color-primario-azul);
+    color: var(--color-blanco);
+    font-family: var(--fuente-principal);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transicion-rapida);
+}
+
+.boton_agregar_carrito:hover {
+    background-color: var(--color-primario-azul-hover);
+}
+
+/* Estilos de la seccion del carrito */
+.lista_carrito {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+    min-height: 100px;
+}
+
+.item_carrito {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde-suave);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.info_item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.nombre_item {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.detalles_item {
+    font-size: 12px;
+    color: var(--color-texto-secundario);
+}
+
+.acciones_item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.cantidad_item {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-primario-azul);
+}
+
+.boton_quitar {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 18px;
+    transition: var(--transicion-rapida);
+}
+
+.boton_quitar:hover {
+    transform: scale(1.15);
+}
+
+/* Resumen del carrito */
+.resumen_carrito {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 2px solid var(--color-borde-suave);
+    margin-top: 10px;
+}
+
+.total_carrito {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.total_carrito strong {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-primario-azul);
+    margin-left: 8px;
+}
+
+.boton_accion {
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--color-secundario-verde); /* Boton en verde */
+    color: var(--color-blanco);
+    font-family: var(--fuente-principal);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.15);
+    transition: var(--transicion-rapida);
+}
+
+.boton_accion:hover {
+    background-color: var(--color-secundario-verde-hover);
+}
+
+.boton_accion:active {
+    transform: scale(0.98);
+}
+
+/* Estilos de tablas del historial */
+.tabla_responsiva {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--color-borde-suave);
+}
+
+.tabla_datos {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: left;
+}
+
+.tabla_datos th,
+.tabla_datos td {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--color-borde-suave);
+}
+
+.tabla_datos th {
+    background-color: var(--color-primario-azul);
+    color: var(--color-blanco);
+    font-weight: 600;
+}
+
+#vista_compras .tabla_datos th {
+    background-color: var(--color-secundario-verde); /* Encabezado de compras en verde */
+}
+
+.tabla_datos tbody tr:nth-child(even) {
+    background-color: var(--color-fondo-general);
+}
+
+.tabla_datos tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+/* Mensaje vacio en tablas o carrito */
+.mensaje_vacio {
+    padding: 40px;
+    text-align: center;
+    color: var(--color-texto-secundario);
+    font-size: 14px;
+    border: 1px dashed var(--color-borde);
+    border-radius: 8px;
+    background-color: var(--color-fondo-general);
+}
+
+/* Columna derecha del chatbot */
+.columna_chat {
+    width: 30%;
+    height: 100%;
+    background-color: var(--color-fondo-chat);
+    border-left: 1px solid var(--color-borde-suave);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Modificacion de la cabecera en el chat */
+.columna_chat .encabezado_chat {
+    background: linear-gradient(135deg, var(--color-primario-azul), var(--color-secundario-verde));
+    color: var(--color-blanco);
+    padding: 20px 24px;
+    border-bottom: none;
+}
+
+.columna_chat .encabezado_chat .titulo_seccion {
+    color: var(--color-blanco);
+    font-size: 18px;
+}
+
+.columna_chat .encabezado_chat .subtitulo_seccion {
+    color: var(--color-blanco);
+    opacity: 0.9;
+}
+
+/* Area scrollable del historial de mensajes */
+.area_mensajes {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.area_mensajes::-webkit-scrollbar {
+    width: 6px;
+}
+
+.area_mensajes::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.area_mensajes::-webkit-scrollbar-thumb {
+    background-color: var(--color-borde);
+    border-radius: 3px;
+}
+
+/* Burbujas de mensajes */
+.mensaje {
+    display: flex;
+    max-width: 85%;
+    animation: aparecer 0.25s ease forwards;
+}
+
+.mensaje.usuario {
+    align-self: flex-end;
+}
+
+.mensaje.bot {
+    align-self: flex-start;
+}
+
+.contenido_mensaje {
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.mensaje.usuario .contenido_mensaje {
+    background-color: var(--color-burbuja-usuario);
+    color: #0c4a6e;
+    border-bottom-right-radius: 4px;
+}
+
+.mensaje.bot .contenido_mensaje {
+    background-color: var(--color-burbuja-bot);
+    color: var(--color-texto-principal);
+    border-bottom-left-radius: 4px;
+    border: 1px solid var(--color-borde-suave);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+/* Zona inferior de entrada de texto */
+.zona_entrada {
+    padding: 16px 20px 20px 20px;
+    background-color: var(--color-blanco);
+    border-top: 1px solid var(--color-borde-suave);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.formulario_entrada {
+    display: flex;
+    gap: 10px;
+}
+
+#entrada_usuario {
+    flex: 1;
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 8px;
+    border: 1px solid var(--color-borde);
+    font-family: var(--fuente-principal);
+    font-size: 14px;
+    outline: none;
+    transition: var(--transicion-rapida);
+}
+
+#entrada_usuario:focus {
+    border-color: var(--color-primario-azul);
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+#boton_enviar {
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--color-primario-azul);
+    color: var(--color-blanco);
+    font-family: var(--fuente-principal);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transicion-rapida);
+}
+
+#boton_enviar:hover {
+    background-color: var(--color-primario-azul-hover);
+}
+
+#boton_enviar:active {
+    transform: scale(0.97);
+}
+
+.nota_medica {
+    font-size: 10px;
+    color: var(--color-texto-secundario);
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* Animacion de aparicion */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animacion de aparicion suave para vistas */
+@keyframes aparecer_suave {
+    from {
+        opacity: 0;
+        transform: scale(0.99);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Media Queries para comportamiento responsivo en pantallas moviles */
+@media (max-width: 768px) {
+    .boton_movil {
+        display: block;
+    }
+    
+    body {
+        overflow: auto;
+    }
+
+    .layout_principal {
+        flex-direction: column;
+        height: auto;
+        overflow: visible;
+        padding-top: 55px; /* Espacio para el boton de alternar */
+    }
+
+    .columna_inventario {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        padding: 16px;
+    }
+
+    /* Ajuste en los botones de navegacion en celulares */
+    .navegacion_superior {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .enlace_nav {
+        flex: 1 1 calc(50% - 8px);
+        text-align: center;
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+
+    .columna_chat {
+        display: none;
+        width: 100%;
+        height: calc(100vh - 55px);
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 99;
+        border-left: none;
+    }
+
+    /* Clase activa para mostrar el chat mediante modificacion DOM */
+    .columna_chat.activo {
+        display: flex;
+    }
+}

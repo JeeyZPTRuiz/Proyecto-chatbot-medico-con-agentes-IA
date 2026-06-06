@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Botica</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Boton movil para alternar vista entre productos y chat en pantallas pequenas -->
+    <button id="boton_menu_movil" class="boton_movil">
+        Alternar Vista
+    </button>
+
+    <!-- Contenedor principal de doble columna -->
+    <main id="contenedor_layout" class="layout_principal">
+
+        <!-- Columna izquierda: Panel principal con navegacion -->
+        <section id="panel_principal" class="columna_inventario">
+
+            <!-- Menu de navegacion superior -->
+            <nav class="navegacion_superior">
+                <button id="boton_nav_productos" class="enlace_nav activo">Medicamentos</button>
+                <button id="boton_nav_carrito" class="enlace_nav">Carrito</button>
+                <button id="boton_nav_compras" class="enlace_nav">Historial de Compras</button>
+                <button id="boton_nav_chat" class="enlace_nav">Historial de Chat</button>
+            </nav>
+
+            <!-- Contenedores de las distintas vistas -->
+
+            <!-- Vista de Medicamentos (visible por defecto) -->
+            <div id="vista_productos" class="contenedor_vista">
+                <header class="encabezado_seccion">
+                    <h2 class="titulo_seccion">Medicamentos</h2>
+                    <p class="subtitulo_seccion">Productos disponibles en tienda</p>
+                </header>
+                <div id="lista_productos" class="lista_tarjetas">
+                    <!-- Se inyectaran mediante javascript -->
+                </div>
+            </div>
+
+            <!-- Vista del Carrito (oculto por defecto) -->
+            <div id="vista_carrito" class="contenedor_vista oculto">
+                <header class="encabezado_seccion">
+                    <div class="icono_seccion">🛒</div>
+                    <h2 class="titulo_seccion">Carrito de Compras</h2>
+                    <p class="subtitulo_seccion">Medicamentos seleccionados para comprar</p>
+                </header>
+                <div id="contenido_carrito" class="lista_carrito">
+                    <!-- Se inyectaran los items del carrito mediante javascript -->
+                </div>
+                <div class="resumen_carrito">
+                    <div class="total_carrito">
+                        <span>Total:</span>
+                        <strong id="total_compra">0.00</strong>
+                    </div>
+                    <button id="boton_procesar_compra" class="boton_accion">Procesar Compra</button>
+                </div>
+            </div>
+
+            <!-- Vista de Historial de Compras (oculto por defecto) -->
+            <div id="vista_compras" class="contenedor_vista oculto">
+                <header class="encabezado_seccion">
+                    <div class="icono_seccion">📋</div>
+                    <h2 class="titulo_seccion">Historial de Compras</h2>
+                    <p class="subtitulo_seccion">Registro de compras de la botica</p>
+                </header>
+                <div class="tabla_responsiva">
+                    <table class="tabla_datos">
+                        <thead>
+                            <tr>
+                                <th>ID Compra</th>
+                                <th>Total</th>
+                                <th>Fecha</th>
+                                <th>Detalles</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla_compras_cuerpo">
+                            <!-- Se inyectara el historial de compras mediante javascript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Vista de Historial de Chat (oculto por defecto) -->
+            <div id="vista_historial_chat" class="contenedor_vista oculto">
+                <header class="encabezado_seccion">
+                    <div class="icono_seccion">💬</div>
+                    <h2 class="titulo_seccion">Historial de Chat</h2>
+                    <p class="subtitulo_seccion">Registro de consultas al bot de triage</p>
+                </header>
+                <div class="tabla_responsiva">
+                    <table class="tabla_datos">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Mensaje Paciente</th>
+                                <th>Accion Bot</th>
+                                <th>Fecha Registro</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla_chat_cuerpo">
+                            <!-- Se inyectaran los logs del chat mediante javascript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Columna derecha: Asistente virtual de botica -->
+        <section id="barra_lateral_chat" class="columna_chat">
+            <header class="encabezado_seccion encabezado_chat">
+                <h2 class="titulo_seccion">Asistente Virtual de Botica</h2>
+                <p class="subtitulo_seccion">En linea y listo para ayudarte</p>
+            </header>
+
+            <!-- Contenedor para el historial de mensajes -->
+            <div id="contenedor_chat" class="area_mensajes">
+                <!-- Mensaje de bienvenida inicial -->
+                <div class="mensaje bot">
+                    <div class="contenido_mensaje">
+                        Hola, soy tu asistente de botica. Puedo ayudarte con consultas de salud leves y medicamentos de
+                        venta libre. Por favor, describe tus sintomas.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zona de entrada y control de envio -->
+            <footer class="zona_entrada">
+                <div class="formulario_entrada">
+                    <input type="text" id="entrada_usuario" placeholder="Escribe tu consulta aqui..."
+                        autocomplete="off">
+                    <button id="boton_enviar">Enviar</button>
+                </div>
+                <p class="nota_medica">
+                    Este asistente no reemplaza la opinion de un medico profesional. Ante sintomas graves, acuda a
+                    urgencias de inmediato.
+                </p>
+            </footer>
+        </section>
+
+    </main>
+
+    <!-- Script de logica de la aplicacion -->
+    <script src="app.js"></script>
+</body>
+
+</html>
