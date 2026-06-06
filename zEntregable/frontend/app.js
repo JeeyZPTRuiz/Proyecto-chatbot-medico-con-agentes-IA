@@ -217,7 +217,7 @@ async function procesar_compra() {
         }
 
         alert("Compra procesada con exito");
-        
+
         // Vaciar el carrito y actualizar la interfaz del catalogo
         carrito = [];
         await cargar_inventario();
@@ -253,7 +253,7 @@ function renderizar_tabla_compras(historial) {
 
     historial.forEach(function (compra) {
         const detalles_texto = compra.detalles.map(d => `${d.nombre_medicamento} (x${d.cantidad})`).join(", ");
-        
+
         const fila = document.createElement("tr");
         fila.innerHTML = `
             <td>${compra.id}</td>
@@ -314,6 +314,9 @@ function agregar_mensaje_interfaz(texto, remitente) {
 
     // Hacer scroll automatico hacia abajo en el chat
     contenedor_chat.scrollTop = contenedor_chat.scrollHeight;
+
+    let texto_formateado = texto.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    div_contenido.innerHTML = texto_formateado;
 }
 
 // Captura la consulta del usuario, la envia al servidor y muestra la respuesta
@@ -344,7 +347,7 @@ async function enviar_mensaje() {
         }
 
         const datos = await respuesta.json();
-        
+
         // Agregar la respuesta del bot de botica
         agregar_mensaje_interfaz(datos.respuesta, "bot");
     } catch (error) {
