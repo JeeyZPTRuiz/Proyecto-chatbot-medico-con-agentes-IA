@@ -1,1323 +1,1226 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-:root{
+:root {
+    /* PALETA CIBER-MÉDICA CLARA (ESTILO 2026) */
+    --primary-cyan: #06b6d4;      /* Cian neón de alta tecnología */
+    --primary-blue: #0ea5e9;      /* Azul eléctrico médico */
+    --primary-teal: #0d9488;      /* Verde azulado clínico */
+    --accent-glow: rgba(6, 182, 212, 0.4);
+    
+    /* Tonos Neutros de Laboratorio */
+    --bg-base: #f1f5f9;           /* Fondo general limpio */
+    --text-main: #0f172a;         /* Texto principal de alto contraste */
+    --text-muted: #475569;        /* Texto secundario */
+    --text-white: #ffffff;
+    
+    /* Refracción de Vidrio (Glassmorphism Avanzado) */
+    --glass-bg: rgba(255, 255, 255, 0.45);
+    --glass-bg-hover: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --glass-border-inner: rgba(6, 182, 212, 0.08);
+    
+    /* Luces LED de Estado */
+    --led-online: #10b981;        /* Verde activo */
+    --led-alert: #f43f5e;         /* Rojo advertencia */
+    --led-warning: #f59e0b;       /* Naranja */
+    
+    /* Sombras Multicapa */
+    --shadow-soft: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.01),
+        0 2px 4px -2px rgba(0, 0, 0, 0.01);
+    
+    --shadow-medium: 
+        0 10px 25px -5px rgba(14, 165, 233, 0.08), 
+        0 8px 16px -6px rgba(6, 182, 212, 0.05),
+        inset 0 1px 1px rgba(255, 255, 255, 0.8);
+        
+    --shadow-glow: 
+        0 20px 40px -10px rgba(14, 165, 233, 0.12),
+        0 0 15px 0 rgba(6, 182, 212, 0.1),
+        inset 0 1px 2px rgba(255, 255, 255, 0.9);
+        
+    --shadow-btn:
+        0 8px 20px -4px rgba(14, 165, 233, 0.25),
+        0 4px 10px -4px rgba(6, 182, 212, 0.2),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
 
-    /* PALETA MEDICA PREMIUM */
-    --azul:#0EA5E9;
-    --cian:#06B6D4;
-    --blanco:#FFFFFF;
+    /* Radios y Bordes */
+    --radius-2xl: 28px;
+    --radius-xl: 20px;
+    --radius-lg: 16px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
 
-    --fondo:#F4F8FB;
-    --texto:#0F172A;
-    --texto-sec:#64748B;
+    /* Tipografía */
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-display: 'Sora', sans-serif;
+    --font-tech: 'Space Grotesk', sans-serif;
 
-    --glass:rgba(255,255,255,.65);
-    --glass-border:rgba(255,255,255,.35);
-
-    --sombra-suave:
-    0 10px 30px rgba(14,165,233,.08);
-
-    --sombra-media:
-    0 20px 50px rgba(14,165,233,.12);
-
-    --sombra-fuerte:
-    0 30px 80px rgba(14,165,233,.18);
-
-    --radio-xl:24px;
-    --radio-lg:20px;
-    --radio-md:16px;
-    --radio-sm:12px;
-
-    --transicion:
-    all .35s cubic-bezier(.4,0,.2,1);
-
-    --fuente-principal:
-    'Plus Jakarta Sans',
-    sans-serif;
-
-    --fuente-display:
-    'Sora',
-    sans-serif;
+    /* Transición ultra-fluida */
+    --transition-premium: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* RESET */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* RESET GENERAL Y ACCESIBILIDAD */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
 }
 
-html{
-    scroll-behavior:smooth;
+html {
+    scroll-behavior: smooth;
 }
 
-body{
-
-    font-family:var(--fuente-principal);
-
-    color:var(--texto);
-
-    background:
-    radial-gradient(circle at top left,
-    rgba(14,165,233,.15),
-    transparent 35%),
-
-    radial-gradient(circle at bottom right,
-    rgba(6,182,212,.12),
-    transparent 35%),
-
-    var(--fondo);
-
-    min-height:100vh;
-
-    overflow:hidden;
-
-    -webkit-font-smoothing:antialiased;
+/* Selección de texto brillante (Estilo Holográfico) */
+::selection {
+    background: rgba(6, 182, 212, 0.2);
+    color: var(--primary-teal);
+    text-shadow: 0 0 8px rgba(6, 182, 212, 0.35);
 }
 
-/* EFECTO FLOTANTE DEL FONDO */
-
-body::before{
-    content:"";
-
-    position:fixed;
-
-    width:500px;
-    height:500px;
-
-    top:-200px;
-    left:-150px;
-
-    border-radius:50%;
-
-    background:
-    radial-gradient(
-    rgba(14,165,233,.15),
-    transparent 70%);
-
-    filter:blur(60px);
-
-    pointer-events:none;
+/* Clases de Carga (Skeleton Loaders) */
+.skeleton-tarjeta {
+    height: 320px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.45) 25%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.45) 75%);
+    background-size: 200% 100%;
+    animation: skeletonShimmer 1.6s infinite linear;
+    border-radius: var(--radius-2xl);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-soft);
 }
 
-body::after{
-    content:"";
-
-    position:fixed;
-
-    width:500px;
-    height:500px;
-
-    bottom:-250px;
-    right:-150px;
-
-    border-radius:50%;
-
-    background:
-    radial-gradient(
-    rgba(6,182,212,.15),
-    transparent 70%);
-
-    filter:blur(60px);
-
-    pointer-events:none;
+@keyframes skeletonShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 
-/* LAYOUT */
-
-.layout_principal{
-
-    display:flex;
-
-    width:100%;
-    height:100vh;
-
-    overflow:hidden;
-
-    gap:18px;
-
-    padding:18px;
+body {
+    font-family: var(--font-sans);
+    color: var(--text-main);
+    background-color: var(--bg-base);
+    min-height: 100vh;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
 }
 
-/* PANEL PRINCIPAL */
-
-.columna_inventario{
-
-    width:70%;
-
-    background:
-    rgba(255,255,255,.65);
-
-    backdrop-filter:blur(24px);
-
-    -webkit-backdrop-filter:blur(24px);
-
-    border:
-    1px solid var(--glass-border);
-
-    border-radius:
-    var(--radio-xl);
-
-    box-shadow:
-    var(--sombra-media);
-
-    padding:28px;
-
-    overflow-y:auto;
+/* FONDO AMBIENTAL DINÁMICO 2026 (Cyber-Medical Clean) */
+body::before {
+    content: "";
+    position: fixed;
+    width: 60vw;
+    height: 60vw;
+    top: -20%;
+    left: -10%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(14, 165, 233, 0.05) 50%, transparent 100%);
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: -2;
+    animation: floatingOrb 25s infinite alternate ease-in-out;
 }
 
-/* SCROLL */
-
-.columna_inventario::-webkit-scrollbar{
-    width:8px;
+body::after {
+    content: "";
+    position: fixed;
+    width: 50vw;
+    height: 50vw;
+    bottom: -15%;
+    right: -10%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(13, 148, 136, 0.08) 0%, rgba(14, 165, 233, 0.04) 60%, transparent 100%);
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: -2;
+    animation: floatingOrb2 20s infinite alternate ease-in-out;
 }
 
-.columna_inventario::-webkit-scrollbar-thumb{
-
-    background:
-    rgba(14,165,233,.3);
-
-    border-radius:50px;
+/* 
+   CUADRÍCULA CIBERNÉTICA DIGITAL
+   - Genera líneas de cuadrícula semitransparentes mediante degradados repetitivos.
+   - La animación 'gridScroll' desplaza la posición del fondo infinitamente para dar sensación holográfica.
+*/
+.layout_principal::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(14, 165, 233, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14, 165, 233, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: center;
+    pointer-events: none;
+    z-index: -1;
+    animation: gridScroll 120s infinite linear;
 }
 
-/* NAVEGACION */
-
-.navegacion_superior{
-
-    display:flex;
-
-    gap:10px;
-
-    margin-bottom:25px;
-
-    padding:8px;
-
-    background:
-    rgba(255,255,255,.5);
-
-    border-radius:
-    var(--radio-lg);
-
-    backdrop-filter:
-    blur(12px);
+@keyframes gridScroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 60px; }
 }
 
-/* BOTONES MENU */
-
-.enlace_nav{
-
-    flex:1;
-
-    border:none;
-
-    background:transparent;
-
-    padding:14px 20px;
-
-    border-radius:
-    var(--radio-md);
-
-    cursor:pointer;
-
-    font-family:
-    var(--fuente-display);
-
-    font-size:13px;
-
-    font-weight:700;
-
-    color:
-    var(--texto-sec);
-
-    transition:
-    var(--transicion);
+/* 
+   ANILLO DE TELEMETRÍA MÉDICA EN EL FONDO (10/10)
+   - Crea un círculo de líneas discontinuas (border dashed) y un gradiente radial difuminado.
+   - 'rotateTelemetry' lo hace rotar 360 grados de forma infinita a baja velocidad para no distraer.
+*/
+.layout_principal::after {
+    content: "";
+    position: fixed;
+    width: 250px;
+    height: 250px;
+    bottom: 5%;
+    left: 3%;
+    border: 2px dashed rgba(6, 182, 212, 0.08);
+    border-radius: 50%;
+    background: radial-gradient(circle, transparent 65%, rgba(6, 182, 212, 0.015) 67%);
+    animation: rotateTelemetry 45s infinite linear;
+    pointer-events: none;
+    z-index: -1;
 }
 
-.enlace_nav:hover{
-
-    transform:
-    translateY(-2px);
-
-    background:
-    rgba(255,255,255,.75);
-
-    color:
-    var(--azul);
+@keyframes rotateTelemetry {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.03); }
+    100% { transform: rotate(360deg) scale(1); }
 }
 
-.enlace_nav.activo{
-
-    color:white;
-
-    background:
-    linear-gradient(
-    135deg,
-    var(--azul),
-    var(--cian));
-
-    box-shadow:
-    0 15px 35px rgba(14,165,233,.25);
+/* LAYOUT PRINCIPAL DE DOBLE COLUMNA */
+.layout_principal {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    gap: 24px;
+    padding: 24px;
+    position: relative;
 }
 
-/* TITULOS */
-
-.titulo_seccion{
-
-    font-family:
-    var(--fuente-display);
-
-    font-size:30px;
-
-    font-weight:800;
-
-    background:
-    linear-gradient(
-    135deg,
-    var(--azul),
-    var(--cian));
-
-    -webkit-background-clip:text;
-
-    -webkit-text-fill-color:transparent;
+/* Anillo de telemetría médica en el fondo (10/10) */
+.layout_principal::after {
+    content: "";
+    position: fixed;
+    width: 250px;
+    height: 250px;
+    bottom: 5%;
+    left: 3%;
+    border: 2px dashed rgba(6, 182, 212, 0.08);
+    border-radius: 50%;
+    background: radial-gradient(circle, transparent 65%, rgba(6, 182, 212, 0.015) 67%);
+    animation: rotateTelemetry 45s infinite linear;
+    pointer-events: none;
+    z-index: -1;
 }
 
-.subtitulo_seccion{
-
-    margin-top:8px;
-
-    color:
-    var(--texto-sec);
-
-    font-size:14px;
+@keyframes rotateTelemetry {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.03); }
+    100% { transform: rotate(360deg) scale(1); }
 }
 
-.oculto{
-    display:none!important;
+/* COLUMNA IZQUIERDA: PANEL DE INVENTARIO / VISTAS */
+.columna_inventario {
+    width: 100%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-glow);
+    padding: 32px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    transition: var(--transition-premium);
+    position: relative;
 }
 
-/* ===================================== */
-/* TARJETAS PRODUCTOS */
-/* ===================================== */
-
-.lista_tarjetas{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fill,minmax(250px,1fr));
-
-    gap:24px;
-
-    margin-top:20px;
+/* SCROLLBAR FUTURISTA */
+.columna_inventario::-webkit-scrollbar,
+.area_mensajes::-webkit-scrollbar {
+    width: 6px;
 }
 
-.tarjeta_producto{
-
-    position:relative;
-
-    background:
-    rgba(255,255,255,.7);
-
-    backdrop-filter:
-    blur(20px);
-
-    -webkit-backdrop-filter:
-    blur(20px);
-
-    border:
-    1px solid rgba(255,255,255,.45);
-
-    border-radius:
-    24px;
-
-    padding:22px;
-
-    overflow:hidden;
-
-    transform-style:
-    preserve-3d;
-
-    transition:
-    all .45s cubic-bezier(.4,0,.2,1);
-
-    box-shadow:
-    0 10px 30px rgba(14,165,233,.08);
+.columna_inventario::-webkit-scrollbar-track,
+.area_mensajes::-webkit-scrollbar-track {
+    background: transparent;
 }
 
-/* BRILLO */
-
-.tarjeta_producto::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-    linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,.45),
-    transparent);
-
-    transform:
-    translateX(-120%);
-
-    transition:
-    1s;
+.columna_inventario::-webkit-scrollbar-thumb,
+.area_mensajes::-webkit-scrollbar-thumb {
+    background: rgba(6, 182, 212, 0.15);
+    border-radius: 10px;
+    transition: var(--transition-premium);
 }
 
-.tarjeta_producto:hover::before{
-
-    transform:
-    translateX(120%);
+.columna_inventario::-webkit-scrollbar-thumb:hover,
+.area_mensajes::-webkit-scrollbar-thumb:hover {
+    background: rgba(6, 182, 212, 0.35);
 }
 
-.tarjeta_producto:hover{
-
-    transform:
-    perspective(1000px)
-    rotateX(5deg)
-    rotateY(-5deg)
-    translateY(-12px);
-
-    box-shadow:
-    0 35px 80px rgba(14,165,233,.18);
+/* 
+   NAVEGACIÓN SUPERIOR EN FORMA DE CÁPSULA HOLOGRÁFICA
+   - z-index: 150 es crucial: evita que las tarjetas con perspectiva 3D se solapen sobre el menú al hacer scroll.
+   - backdrop-filter: blur(20px) genera el efecto esmerilado de vidrio, ocultando con desenfoque lo que pasa por debajo.
+*/
+.navegacion_superior {
+    display: flex;
+    gap: 8px;
+    padding: 6px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius-xl);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-soft);
+    position: sticky;
+    top: 0;
+    z-index: 150; /* Z-Index elevado para sobrepasar las tarjetas 3D */
 }
 
-.tarjeta_producto h3{
-
-    font-family:
-    var(--fuente-display);
-
-    font-size:18px;
-
-    font-weight:700;
-
-    margin-bottom:6px;
-
-    color:#0F172A;
+/* BOTONES DEL MENÚ DE NAVEGACIÓN */
+.enlace_nav {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 14px 16px;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    color: var(--text-muted);
+    transition: var(--transition-premium);
+    position: relative;
+    overflow: hidden;
 }
 
-.tarjeta_producto p{
-
-    color:#64748B;
-
-    font-size:13px;
-
-    line-height:1.5;
+/* EFECTO HOVER DE LOS BOTONES */
+.enlace_nav:hover {
+    color: var(--primary-cyan);
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.05);
 }
 
-/* BADGES */
-
-.badge_tipo{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:8px 14px;
-
-    border-radius:50px;
-
-    margin-top:10px;
-
-    font-size:11px;
-
-    font-weight:700;
-
-    text-transform:uppercase;
-
-    background:
-    rgba(14,165,233,.1);
-
-    color:
-    var(--azul);
+/* 
+   BOTÓN DE NAVEGACIÓN ACTIVO
+   - Aplica un gradiente azul a cian neón y una sombra interior (inset) que le da profundidad de botón físico.
+*/
+.enlace_nav.activo {
+    color: var(--text-white);
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-cyan));
+    box-shadow: 
+        0 8px 24px rgba(6, 182, 212, 0.25),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    font-weight: 700;
 }
 
-.badge_receta{
-
-    background:
-    rgba(6,182,212,.12);
-
-    color:
-    var(--cian);
+/* 
+   Animación de brillo metálico (Shimmer)
+   - Pasa una franja de luz blanca semi-transparente de izquierda a derecha infinitamente sobre el botón activo.
+*/
+.enlace_nav.activo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transform: translateX(-100%);
+    animation: shimmerEffect 2.5s infinite linear;
 }
 
-/* STOCK */
-
-.stock_info{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-top:16px;
-
-    padding-top:12px;
-
-    border-top:
-    1px solid rgba(148,163,184,.15);
-
-    font-size:13px;
-
-    color:#64748B;
+/* 
+   Línea láser inferior en el botón activo
+   - Genera una pequeña cápsula de luz en el borde inferior.
+   - 'laserSweep' la escala en el eje X para simular el barrido de un escáner constante.
+*/
+.enlace_nav.activo::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--text-white), var(--primary-cyan), var(--text-white), transparent);
+    box-shadow: 0 0 8px var(--primary-cyan);
+    animation: laserSweep 3s infinite ease-in-out;
 }
 
-.stock_info b{
-
-    color:#0F172A;
+@keyframes laserSweep {
+    0%, 100% { transform: scaleX(0.8); opacity: 0.5; }
+    50% { transform: scaleX(1.2); opacity: 1; }
 }
 
-/* BOTON */
-
-.boton_agregar_carrito{
-
-    margin-top:18px;
-
-    width:100%;
-
-    height:46px;
-
-    border:none;
-
-    border-radius:14px;
-
-    cursor:pointer;
-
-    color:white;
-
-    font-size:13px;
-
-    font-weight:700;
-
-    letter-spacing:.5px;
-
-    background:
-    linear-gradient(
-    135deg,
-    var(--azul),
-    var(--cian));
-
-    transition:
-    .35s;
-
-    box-shadow:
-    0 15px 35px rgba(14,165,233,.25);
+@keyframes shimmerEffect {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
 }
 
-.boton_agregar_carrito:hover{
-
-    transform:
-    translateY(-3px);
-
-    box-shadow:
-    0 25px 45px rgba(14,165,233,.35);
+/* ENCABEZADOS DE SECCIÓN */
+.encabezado_seccion {
+    margin-bottom: 8px;
+    position: relative;
 }
 
-.boton_agregar_carrito:active{
-
-    transform:
-    scale(.97);
+.icono_seccion {
+    font-size: 32px;
+    margin-bottom: 12px;
+    display: inline-block;
+    filter: drop-shadow(0 4px 8px rgba(14, 165, 233, 0.2));
+    animation: pulseIcon 3s infinite ease-in-out;
 }
 
-/* ===================================== */
-/* ENCABEZADOS */
-/* ===================================== */
-
-.encabezado_seccion{
-
-    margin-bottom:24px;
+@keyframes pulseIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
 }
 
-.icono_seccion{
-
-    font-size:38px;
-
-    margin-bottom:10px;
+.titulo_seccion {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--text-main), var(--primary-teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-/* ===================================== */
-/* ANIMACION TARJETAS */
-/* ===================================== */
-
-.tarjeta_producto{
-
-    animation:
-    aparecerTarjeta .6s ease both;
+.subtitulo_seccion {
+    margin-top: 6px;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.1px;
 }
 
-@keyframes aparecerTarjeta{
+.oculto {
+    display: none !important;
+}
 
-    from{
+/* ==========================================================================
+   VISTA DE MEDICAMENTOS (TARJETAS)
+   ========================================================================== */
 
-        opacity:0;
+.lista_tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 10px;
+}
 
-        transform:
-        translateY(25px)
-        scale(.95);
+.tarjeta_producto {
+    position: relative;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius-2xl);
+    padding: 26px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition-premium);
+    box-shadow: var(--shadow-medium);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    animation: aparecerTarjeta 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 
+   BRILLO DINÁMICO 3D (SPOTLIGHT CURSOR GLOW)
+   - Utiliza las variables CSS '--mouse-x' y '--mouse-y' actualizadas por el script 'app.js'.
+   - Dibuja un degradado radial (haz de luz cian) centrado exactamente en el cursor al hacer hover.
+*/
+.tarjeta_producto::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(6, 182, 212, 0.18) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.tarjeta_producto:hover::before {
+    opacity: 1;
+}
+
+/* 
+   BRACKETS DE ESCÁNER HUD CLÍNICO (HOVER CARD CORNERS)
+   - CSS Puro sin imágenes: utiliza 8 gradientes de fondo lineales para dibujar 8 segmentos pequeños.
+   - Posicionados en las esquinas mediante coordenadas del background y dimensionados con background-size.
+   - En hover, su opacidad sube a 0.8 de forma elástica, simulando la focalización láser del sensor.
+*/
+.tarjeta_producto::after {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    background-image:
+        linear-gradient(to right, var(--primary-cyan) 2px, transparent 2px),
+        linear-gradient(to bottom, var(--primary-cyan) 2px, transparent 2px),
+        linear-gradient(to left, var(--primary-cyan) 2px, transparent 2px),
+        linear-gradient(to bottom, var(--primary-cyan) 2px, transparent 2px),
+        linear-gradient(to right, var(--primary-cyan) 2px, transparent 2px),
+        linear-gradient(to top, var(--primary-cyan) 2px, transparent 2px),
+        linear-gradient(to left, var(--primary-cyan) 2px, transparent 2px),
+        linear-gradient(to top, var(--primary-cyan) 2px, transparent 2px);
+    background-position: 
+        0 0, 0 0, 
+        100% 0, 100% 0, 
+        0 100%, 0 100%, 
+        100% 100%, 100% 100%;
+    background-size: 
+        12px 2px, 2px 12px, 
+        12px 2px, 2px 12px, 
+        12px 2px, 2px 12px, 
+        12px 2px, 2px 12px;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: var(--transition-premium);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.tarjeta_producto:hover::after {
+    opacity: 0.8;
+}
+
+/* Efecto Holograma Clínico en Hover */
+.tarjeta_producto:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(6, 182, 212, 0.45);
+    background: var(--glass-bg-hover);
+    box-shadow: 
+        0 20px 40px rgba(14, 165, 233, 0.12),
+        0 0 30px rgba(6, 182, 212, 0.1),
+        inset 0 0 15px rgba(6, 182, 212, 0.05);
+}
+
+.tarjeta_producto h3 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-main);
+    letter-spacing: -0.2px;
+}
+
+.tarjeta_producto p {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+/* BADGES DE CLASIFICACIÓN / VENTA */
+.badge_tipo {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-family: var(--font-tech);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    background: rgba(14, 165, 233, 0.08);
+    color: var(--primary-blue);
+    border: 1px solid rgba(14, 165, 233, 0.15);
+    transition: var(--transition-premium);
+}
+
+.badge_receta {
+    background: rgba(244, 63, 94, 0.08);
+    color: var(--led-alert);
+    border: 1px solid rgba(244, 63, 94, 0.15);
+}
+
+/* STOCK E INFORMACIÓN DE VALOR */
+.stock_info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(148, 163, 184, 0.2);
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.stock_info b {
+    color: var(--text-main);
+    font-family: var(--font-tech);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* BOTÓN AGREGAR AL CARRITO */
+.boton_agregar_carrito {
+    margin-top: 18px;
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    color: var(--text-white);
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-cyan));
+    transition: var(--transition-premium);
+    box-shadow: var(--shadow-btn);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.boton_agregar_carrito:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 12px 28px -4px rgba(14, 165, 233, 0.35),
+        0 6px 14px -4px rgba(6, 182, 212, 0.25);
+    filter: brightness(1.05);
+}
+
+.boton_agregar_carrito:active {
+    transform: scale(0.96);
+}
+
+/* ANIMACIÓN DE ENTRADA TARJETAS */
+@keyframes aparecerTarjeta {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
     }
-
-    to{
-
-        opacity:1;
-
-        transform:
-        translateY(0)
-        scale(1);
-    }
-}
-/* ===================================== */
-/* CARRITO */
-/* ===================================== */
-
-.lista_carrito{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:18px;
-
-    margin-top:20px;
-}
-
-.item_carrito{
-
-    background:
-    rgba(255,255,255,.75);
-
-    backdrop-filter:
-    blur(18px);
-
-    border:
-    1px solid rgba(255,255,255,.4);
-
-    border-radius:20px;
-
-    padding:20px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    transition:.35s;
-
-    box-shadow:
-    0 10px 25px rgba(14,165,233,.08);
-}
-
-.item_carrito:hover{
-
-    transform:
-    translateY(-4px);
-
-    box-shadow:
-    0 20px 40px rgba(14,165,233,.15);
-}
-
-.info_item{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:6px;
-}
-
-.nombre_item{
-
-    font-size:16px;
-
-    font-weight:700;
-
-    color:#0F172A;
-}
-
-.detalles_item{
-
-    color:#64748B;
-
-    font-size:13px;
-}
-
-.acciones_item{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
-}
-
-.cantidad_item{
-
-    width:40px;
-
-    height:40px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:12px;
-
-    background:
-    rgba(14,165,233,.1);
-
-    color:
-    var(--azul);
-
-    font-weight:800;
-}
-
-.boton_quitar{
-
-    width:40px;
-
-    height:40px;
-
-    border:none;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    font-size:18px;
-
-    background:
-    rgba(239,68,68,.1);
-
-    color:#ef4444;
-
-    transition:.3s;
-}
-
-.boton_quitar:hover{
-
-    transform:scale(1.1);
-
-    background:
-    rgba(239,68,68,.2);
-}
-
-/* ===================================== */
-/* RESUMEN */
-/* ===================================== */
-
-.resumen_carrito{
-
-    margin-top:25px;
-
-    background:
-    rgba(255,255,255,.75);
-
-    backdrop-filter:
-    blur(18px);
-
-    border:
-    1px solid rgba(255,255,255,.4);
-
-    border-radius:24px;
-
-    padding:24px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    box-shadow:
-    0 15px 35px rgba(14,165,233,.08);
-}
-
-.total_carrito{
-
-    font-size:18px;
-
-    font-weight:700;
-}
-
-.total_carrito strong{
-
-    margin-left:10px;
-
-    font-size:28px;
-
-    background:
-    linear-gradient(
-    135deg,
-    var(--azul),
-    var(--cian));
-
-    -webkit-background-clip:text;
-
-    -webkit-text-fill-color:transparent;
-}
-
-.boton_accion{
-
-    border:none;
-
-    cursor:pointer;
-
-    padding:15px 30px;
-
-    border-radius:16px;
-
-    font-size:14px;
-
-    font-weight:700;
-
-    color:white;
-
-    background:
-    linear-gradient(
-    135deg,
-    var(--azul),
-    var(--cian));
-
-    box-shadow:
-    0 20px 40px rgba(14,165,233,.25);
-
-    transition:.35s;
-}
-
-.boton_accion:hover{
-
-    transform:
-    translateY(-3px);
-
-    box-shadow:
-    0 25px 50px rgba(14,165,233,.35);
-}
-
-/* ===================================== */
-/* TABLAS */
-/* ===================================== */
-
-.tabla_responsiva{
-
-    overflow:auto;
-
-    border-radius:24px;
-
-    background:
-    rgba(255,255,255,.7);
-
-    backdrop-filter:
-    blur(20px);
-
-    border:
-    1px solid rgba(255,255,255,.4);
-
-    box-shadow:
-    0 15px 40px rgba(14,165,233,.08);
-}
-
-.tabla_datos{
-
-    width:100%;
-
-    border-collapse:collapse;
-}
-
-.tabla_datos thead{
-
-    background:
-    linear-gradient(
-    135deg,
-    var(--azul),
-    var(--cian));
-}
-
-.tabla_datos th{
-
-    color:white;
-
-    padding:18px;
-
-    text-align:left;
-
-    font-size:12px;
-
-    letter-spacing:1px;
-
-    text-transform:uppercase;
-}
-
-.tabla_datos td{
-
-    padding:18px;
-
-    color:#334155;
-
-    border-bottom:
-    1px solid rgba(148,163,184,.15);
-}
-
-.tabla_datos tbody tr{
-
-    transition:.3s;
-}
-
-.tabla_datos tbody tr:hover{
-
-    background:
-    rgba(14,165,233,.05);
-
-    transform:
-    scale(1.01);
-}
-
-/* ===================================== */
-/* MENSAJE VACIO */
-/* ===================================== */
-
-.mensaje_vacio{
-
-    padding:50px;
-
-    text-align:center;
-
-    border-radius:24px;
-
-    background:
-    rgba(255,255,255,.65);
-
-    backdrop-filter:
-    blur(15px);
-
-    color:#64748B;
-
-    border:
-    1px dashed rgba(14,165,233,.25);
-}
-/* ===================================== */
-/* COLUMNA CHAT */
-/* ===================================== */
-
-.columna_chat{
-
-    width:30%;
-
-    background:
-    rgba(255,255,255,.65);
-
-    backdrop-filter:
-    blur(25px);
-
-    -webkit-backdrop-filter:
-    blur(25px);
-
-    border:
-    1px solid rgba(255,255,255,.35);
-
-    border-radius:24px;
-
-    overflow:hidden;
-
-    box-shadow:
-    0 20px 50px rgba(14,165,233,.10);
-
-    display:flex;
-
-    flex-direction:column;
-}
-
-/* ===================================== */
-/* HEADER CHAT */
-/* ===================================== */
-
-.encabezado_chat{
-
-    padding:24px;
-
-    background:
-    linear-gradient(
-    135deg,
-    var(--azul),
-    var(--cian));
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.encabezado_chat::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:250px;
-    height:250px;
-
-    top:-120px;
-    right:-120px;
-
-    border-radius:50%;
-
-    background:
-    rgba(255,255,255,.12);
-}
-
-.columna_chat .titulo_seccion{
-
-    color:white;
-
-    background:none;
-
-    -webkit-text-fill-color:white;
-}
-
-.columna_chat .subtitulo_seccion{
-
-    color:
-    rgba(255,255,255,.8);
-}
-
-/* ===================================== */
-/* MENSAJES */
-/* ===================================== */
-
-.area_mensajes{
-
-    flex:1;
-
-    overflow-y:auto;
-
-    padding:20px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:16px;
-}
-
-.area_mensajes::-webkit-scrollbar{
-
-    width:6px;
-}
-
-.area_mensajes::-webkit-scrollbar-thumb{
-
-    background:
-    rgba(14,165,233,.25);
-
-    border-radius:50px;
-}
-
-.mensaje{
-
-    display:flex;
-
-    max-width:85%;
-
-    animation:
-    aparecerMensaje .35s ease;
-}
-
-.mensaje.usuario{
-
-    align-self:flex-end;
-}
-
-.mensaje.bot{
-
-    align-self:flex-start;
-}
-
-.contenido_mensaje{
-
-    padding:14px 18px;
-
-    border-radius:18px;
-
-    line-height:1.6;
-
-    font-size:14px;
-}
-
-/* USUARIO */
-
-.mensaje.usuario .contenido_mensaje{
-
-    background:
-    linear-gradient(
-    135deg,
-    var(--azul),
-    var(--cian));
-
-    color:white;
-
-    box-shadow:
-    0 15px 35px rgba(14,165,233,.25);
-
-    border-bottom-right-radius:6px;
-}
-
-/* BOT */
-
-.mensaje.bot .contenido_mensaje{
-
-    background:
-    rgba(255,255,255,.85);
-
-    backdrop-filter:
-    blur(15px);
-
-    color:#0F172A;
-
-    border:
-    1px solid rgba(255,255,255,.4);
-
-    box-shadow:
-    0 10px 25px rgba(0,0,0,.05);
-
-    border-bottom-left-radius:6px;
-}
-
-/* ===================================== */
-/* INPUT */
-/* ===================================== */
-
-.zona_entrada{
-
-    padding:18px;
-
-    background:
-    rgba(255,255,255,.75);
-
-    backdrop-filter:
-    blur(20px);
-
-    border-top:
-    1px solid rgba(255,255,255,.4);
-}
-
-.formulario_entrada{
-
-    display:flex;
-
-    gap:10px;
-}
-
-#entrada_usuario{
-
-    flex:1;
-
-    height:50px;
-
-    border:none;
-
-    outline:none;
-
-    padding:0 18px;
-
-    border-radius:16px;
-
-    background:
-    rgba(255,255,255,.8);
-
-    box-shadow:
-    inset 0 0 0 1px rgba(14,165,233,.15);
-
-    font-size:14px;
-
-    transition:.3s;
-}
-
-#entrada_usuario:focus{
-
-    box-shadow:
-    inset 0 0 0 2px rgba(14,165,233,.35),
-    0 0 20px rgba(14,165,233,.15);
-}
-
-#boton_enviar{
-
-    height:50px;
-
-    padding:0 24px;
-
-    border:none;
-
-    border-radius:16px;
-
-    cursor:pointer;
-
-    color:white;
-
-    font-weight:700;
-
-    background:
-    linear-gradient(
-    135deg,
-    var(--azul),
-    var(--cian));
-
-    box-shadow:
-    0 15px 35px rgba(14,165,233,.25);
-
-    transition:.3s;
-}
-
-#boton_enviar:hover{
-
-    transform:
-    translateY(-2px);
-
-    box-shadow:
-    0 20px 40px rgba(14,165,233,.35);
-}
-
-.nota_medica{
-
-    margin-top:10px;
-
-    font-size:11px;
-
-    text-align:center;
-
-    color:#64748B;
-}
-
-/* ===================================== */
-/* ANIMACIONES */
-/* ===================================== */
-
-@keyframes aparecerMensaje{
-
-    from{
-
-        opacity:0;
-
-        transform:
-        translateY(15px);
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-        translateY(0);
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
 
-@keyframes fadeUp{
+/* ==========================================================================
+   VISTA DEL CARRITO DE COMPRAS
+   ========================================================================== */
 
-    from{
+.lista_carrito {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 10px;
+}
 
-        opacity:0;
+.item_carrito {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius-xl);
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition-premium);
+    box-shadow: var(--shadow-soft);
+}
 
-        transform:
-        translateY(20px);
+.item_carrito:hover {
+    transform: translateX(4px);
+    border-color: rgba(6, 182, 212, 0.2);
+    box-shadow: var(--shadow-medium);
+}
+
+.info_item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.nombre_item {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.detalles_item {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.acciones_item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.cantidad_item {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    background: rgba(6, 182, 212, 0.08);
+    border: 1px solid rgba(6, 182, 212, 0.12);
+    color: var(--primary-cyan);
+    font-family: var(--font-tech);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.boton_quitar {
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 16px;
+    background: rgba(244, 63, 94, 0.08);
+    color: var(--led-alert);
+    border: 1px solid rgba(244, 63, 94, 0.12);
+    transition: var(--transition-premium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boton_quitar:hover {
+    transform: scale(1.08) rotate(8deg);
+    background: rgba(244, 63, 94, 0.15);
+    color: var(--led-alert);
+}
+
+/* CUADRO DE RESUMEN DEL CARRITO */
+.resumen_carrito {
+    margin-top: 32px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius-xl);
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-medium);
+}
+
+.total_carrito {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.total_carrito strong {
+    margin-left: 12px;
+    font-family: var(--font-tech);
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    vertical-align: middle;
+}
+
+.boton_accion {
+    border: none;
+    cursor: pointer;
+    padding: 16px 36px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-white);
+    background: linear-gradient(135deg, var(--primary-teal), var(--primary-cyan));
+    box-shadow: var(--shadow-btn);
+    transition: var(--transition-premium);
+}
+
+.boton_accion:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 12px 28px -4px rgba(13, 148, 136, 0.35),
+        0 6px 14px -4px rgba(6, 182, 212, 0.25);
+    filter: brightness(1.05);
+}
+
+/* ==========================================================================
+   TABLAS RESPONSIVAS (HISTORIAL DE COMPRAS / CHATS)
+   ========================================================================== */
+
+.tabla_responsiva {
+    overflow-x: auto;
+    border-radius: var(--radius-xl);
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: var(--shadow-medium);
+}
+
+.tabla_datos {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 14px;
+}
+
+.tabla_datos thead {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.tabla_datos th {
+    color: var(--text-main);
+    padding: 20px 24px;
+    text-align: left;
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 2px solid rgba(6, 182, 212, 0.15);
+}
+
+.tabla_datos td {
+    padding: 18px 24px;
+    color: var(--text-muted);
+    font-weight: 500;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    transition: var(--transition-premium);
+}
+
+.tabla_datos tbody tr {
+    transition: var(--transition-premium);
+}
+
+/* Hover de filas con sutil brillo */
+.tabla_datos tbody tr:hover {
+    background: rgba(6, 182, 212, 0.03);
+}
+
+.tabla_datos tbody tr:hover td {
+    color: var(--text-main);
+    transform: scale(1.002);
+}
+
+.tabla_datos tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Estilo para los códigos/IDs de tabla */
+.tabla_datos td:first-child {
+    font-family: var(--font-tech);
+    font-weight: 600;
+    color: var(--primary-teal);
+}
+
+/* ==========================================================================
+   MENSAJE VACÍO
+   ========================================================================== */
+
+.mensaje_vacio {
+    padding: 60px 40px;
+    text-align: center;
+    border-radius: var(--radius-xl);
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--text-muted);
+    border: 2px dashed rgba(6, 182, 212, 0.25);
+    font-family: var(--font-display);
+    font-size: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ==========================================================================
+   COLUMNA DERECHA: ASISTENTE VIRTUAL CHAT (CYBER BOTICA)
+   ========================================================================== */
+
+/* 
+   COLUMNA DERECHA (ASISTENTE VIRTUAL CHAT - FLOATING WIDGET)
+   - position: fixed la saca del flujo normal para que flote en la esquina inferior derecha.
+   - Por defecto está oculta con opacity: 0 y desplazada hacia abajo.
+   - Cuando tiene la clase '.activo' se escala e ilumina suavemente en su lugar.
+*/
+.columna_chat {
+    position: fixed;
+    right: 24px;
+    bottom: 96px; /* Se sitúa directamente encima del botón flotante */
+    width: 380px;
+    height: 600px;
+    max-height: calc(100vh - 140px);
+    background: rgba(255, 255, 255, 0.96); /* Más sólido para mayor legibilidad flotante */
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-fuerte);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px) scale(0.95);
+    transition: var(--transition-premium);
+}
+
+.columna_chat.activo {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0) scale(1);
+    box-shadow: 
+        0 30px 70px rgba(0, 0, 0, 0.15),
+        0 0 30px rgba(6, 182, 212, 0.1);
+}
+
+/* Efecto de líneas de escaneo holográficas */
+.columna_chat::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(6, 182, 212, 0.012) 50%, transparent 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* ENCABEZADO CHAT CON TEXTURA DE RED CLARA */
+.encabezado_chat {
+    padding: 24px;
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), rgba(6, 182, 212, 0.08));
+    border-bottom: 1px solid rgba(6, 182, 212, 0.12);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Indicador LED de Estado "En Línea" */
+.encabezado_chat::after {
+    content: "ONLINE";
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-family: var(--font-tech);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--led-online);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Punto LED parpadeante */
+.encabezado_chat::before {
+    content: "";
+    position: absolute;
+    top: 29px;
+    right: 76px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--led-online);
+    box-shadow: 0 0 10px var(--led-online);
+    animation: ledPulse 2s infinite ease-in-out;
+}
+
+@keyframes ledPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.columna_chat .titulo_seccion {
+    font-size: 20px;
+    letter-spacing: -0.2px;
+}
+
+.columna_chat .subtitulo_seccion {
+    font-size: 13px;
+}
+
+/* ÁREA DE MENSAJES */
+.area_mensajes {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mensaje {
+    display: flex;
+    max-width: 85%;
+    animation: aparecerMensaje 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.mensaje.usuario {
+    align-self: flex-end;
+}
+
+.mensaje.bot {
+    align-self: flex-start;
+}
+
+.contenido_mensaje {
+    padding: 14px 20px;
+    border-radius: 20px;
+    line-height: 1.6;
+    font-size: 14px;
+    font-weight: 500;
+    word-break: break-word;
+}
+
+/* MENSAJE USUARIO (GLOW AZUL CLARO) */
+.mensaje.usuario .contenido_mensaje {
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-cyan));
+    color: var(--text-white);
+    box-shadow: 
+        0 10px 20px -5px rgba(14, 165, 233, 0.25),
+        0 4px 8px -2px rgba(6, 182, 212, 0.15);
+    border-bottom-right-radius: 4px;
+}
+
+/* MENSAJE BOT (CLÍNICO FRÍO) */
+.mensaje.bot .contenido_mensaje {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-left: 3px solid var(--primary-cyan);
+    color: var(--text-main);
+    box-shadow: var(--shadow-soft), 0 0 10px rgba(6, 182, 212, 0.02);
+    border-bottom-left-radius: 4px;
+    position: relative;
+}
+
+@keyframes aparecerMensaje {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.97);
     }
-
-    to{
-
-        opacity:1;
-
-        transform:
-        translateY(0);
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
 
-.contenedor_vista{
-
-    animation:
-    fadeUp .4s ease;
+/* ZONA DE ENTRADA Y FORMULARIO DEL CHAT */
+.zona_entrada {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(6, 182, 212, 0.12);
 }
 
-/* ===================================== */
-/* BOTON MOVIL */
-/* ===================================== */
-
-.boton_movil{
-
-    display:none;
+.formulario_entrada {
+    display: flex;
+    gap: 12px;
 }
 
-/* ===================================== */
-/* RESPONSIVE */
-/* ===================================== */
+#entrada_usuario {
+    flex: 1;
+    height: 48px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: var(--radius-md);
+    padding: 0 18px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+    transition: var(--transition-premium);
+}
 
-@media (max-width:1024px){
+#entrada_usuario:focus {
+    border-color: var(--primary-cyan);
+    box-shadow: 
+        0 0 15px rgba(6, 182, 212, 0.25),
+        inset 0 1px 2px rgba(0, 0, 0, 0.02);
+    background: var(--text-white);
+}
 
-    .layout_principal{
+#boton_enviar {
+    height: 48px;
+    padding: 0 24px;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    color: var(--text-white);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-cyan));
+    box-shadow: var(--shadow-btn);
+    transition: var(--transition-premium);
+}
 
-        flex-direction:column;
+#boton_enviar:hover {
+    transform: translateY(-1px);
+    box-shadow: 
+        0 10px 20px -4px rgba(14, 165, 233, 0.35),
+        0 4px 10px -4px rgba(6, 182, 212, 0.25);
+}
 
-        height:auto;
+#boton_enviar:active {
+    transform: scale(0.96);
+}
+
+.nota_medica {
+    margin-top: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--text-muted);
+    opacity: 0.8;
+}
+
+/* ANIMACIONES GLOBALES */
+.contenedor_vista {
+    animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
     }
-
-    .columna_inventario{
-
-        width:100%;
-    }
-
-    .columna_chat{
-
-        width:100%;
-
-        min-height:600px;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-@media (max-width:768px){
+/* ==========================================================================
+   BOTON MOVIL E INTERFAZ RESPONSIVA (DRAWER CHAT 2026)
+   ========================================================================== */
 
-    body{
+/* ==========================================================================
+   BOTÓN FLOTANTE DEL ASISTENTE VIRTUAL (CYBER CHATBOT 2026)
+   ========================================================================== */
 
-        overflow:auto;
+/* 
+   Botón flotante clínico
+   - Siempre visible en desktop y móvil.
+   - Tiene un chat-bubble prepend en CSS y efectos de pulso circular neón.
+*/
+.boton_movil {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1001; /* Queda encima del panel de chat */
+    padding: 14px 28px;
+    border-radius: var(--radius-xl);
+    background: linear-gradient(135deg, var(--primary-teal), var(--primary-cyan));
+    color: var(--text-white);
+    border: none;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    box-shadow: 
+        0 10px 25px rgba(6, 182, 212, 0.3),
+        0 0 0 4px rgba(6, 182, 212, 0.05);
+    cursor: pointer;
+    transition: var(--transition-premium);
+}
+
+/* Icono de mensaje agregado mediante pseudoelemento */
+.boton_movil::before {
+    content: "💬 ";
+    font-size: 16px;
+    margin-right: 6px;
+}
+
+.boton_movil:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 
+        0 15px 30px rgba(6, 182, 212, 0.4),
+        0 0 15px var(--accent-glow);
+}
+
+.boton_movil:active {
+    transform: scale(0.96);
+}
+
+/* RESPONSIVIDAD DEL PANEL FLOTANTE EN MÓVILES */
+@media (max-width: 800px) {
+    body {
+        overflow-y: auto;
     }
 
-    .layout_principal{
-
-        padding:12px;
+    .layout_principal {
+        padding: 12px;
+        height: auto;
+        overflow-y: auto;
     }
 
-    .lista_tarjetas{
-
-        grid-template-columns:
-        repeat(auto-fill,minmax(180px,1fr));
+    .columna_inventario {
+        width: 100%;
+        padding: 20px;
     }
 
-    .resumen_carrito{
-
-        flex-direction:column;
-
-        gap:15px;
+    /* Adaptación del panel flotante para pantallas pequeñas */
+    .columna_chat {
+        right: 12px;
+        bottom: 84px;
+        width: calc(100% - 24px);
+        max-width: 380px;
+        height: 520px;
+        max-height: calc(100vh - 100px);
     }
 
-    .navegacion_superior{
-
-        flex-wrap:wrap;
+    .boton_movil {
+        bottom: 16px;
+        right: 16px;
+        left: 16px;
+        width: calc(100% - 32px);
+        border-radius: var(--radius-lg);
     }
 
-    .enlace_nav{
-
-        min-width:140px;
+    .lista_tarjetas {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 16px;
     }
 
-    .titulo_seccion{
-
-        font-size:24px;
+    .resumen_carrito {
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px;
+        align-items: stretch;
+        text-align: center;
     }
 
-    .columna_chat{
+    .total_carrito strong {
+        display: block;
+        margin-left: 0;
+        margin-top: 4px;
+    }
 
-        min-height:500px;
+    .navegacion_superior {
+        flex-wrap: wrap;
+        padding: 4px;
+    }
+
+    .enlace_nav {
+        min-width: calc(50% - 4px);
+        padding: 10px 8px;
+        font-size: 12px;
+    }
+
+    .titulo_seccion {
+        font-size: 22px;
     }
 }
+
