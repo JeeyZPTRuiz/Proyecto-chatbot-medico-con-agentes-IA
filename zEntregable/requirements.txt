@@ -1,8 +1,10 @@
-fastapi
-uvicorn[standard]
-python-multipart
-pydantic
+flask
+gunicorn
+google-generativeai
+python-dotenv
 numpy
 scikit-learn
 pdfplumber
 python-docx
+python-multipart
+pydantic
